@@ -38,7 +38,7 @@ public class Usuario {
 	private String email;
 
 	@NotNull
-	@Size(min = 11, max = 11, message = "CPF inválido, insira os 11 digitos sem pontuações ou espaço.")
+	@Size(min = 11, max = 11)
 	@Column(unique = true)
 	private String cpf;
 

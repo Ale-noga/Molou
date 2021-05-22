@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.moloucars.moloucars.Model.Usuario;
 import com.moloucars.moloucars.Repository.UsuarioRepository;
+import com.moloucars.moloucars.Service.UsuarioService;
 
 @RestController
 @RequestMapping("/usuario")
@@ -34,7 +35,7 @@ public class UsuarioController {
 	}
 
 	@GetMapping("{id}")
-	public ResponseEntity<Usuario> getById(@PathVariable @Valid Long id) {
+	public ResponseEntity<Usuario> getById(@PathVariable Long id) {
 		return repository.findById(id).map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.notFound().build());
 	}
 
