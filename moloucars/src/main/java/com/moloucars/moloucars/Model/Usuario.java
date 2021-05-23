@@ -34,7 +34,7 @@ public class Usuario {
 	@NotNull
 	@Size(min = 3, max = 70)
 	@Column(unique = true)
-	@Email
+	@Email(message = "Email inválido")
 	private String email;
 
 	@NotNull

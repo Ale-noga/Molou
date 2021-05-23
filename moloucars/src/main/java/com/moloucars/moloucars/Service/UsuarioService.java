@@ -3,6 +3,8 @@ package com.moloucars.moloucars.Service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.moloucars.moloucars.Model.Usuario;
@@ -14,37 +16,26 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository repository;
 
-	Boolean validadeEmail = true;
-	Boolean validadeCpf = true;
+	public ResponseEntity<?> postUsuario(Usuario usuario) {
+		String cpf = usuario.getCpf();
+		Optional<Usuario> validaCpf = repository.findByCpfEquals(cpf);
+		String email = usuario.getEmail();
+		Optional<Usuario> validaEmail = repository.findByEmailEquals(email);
 
-	public Boolean validaEmail(String email) {
-		Optional<Usuario> usuario = repository.findByCpf(email);
-
-		if (usuario.isPresent()) {
-			validadeEmail = false;
-			return validadeEmail;
+		if (validaCpf.isPresent()) {
+			String message = "CPF DUPLICADO";
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
 		}
 
-		return validadeEmail;
-	}
-
-	public Boolean validaCPF(String cpf) {
-		Optional<Usuario> usuario = repository.findByCpf(cpf);
-
-		if (usuario.isPresent()) {
-			validadeCpf = false;
-			return validadeCpf;
+		else if (validaEmail.isPresent()) {
+			String message = "E-MAIL DUPLICADO";
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
 		}
 
-		return validadeCpf;
-	}
+		else {
+			return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(usuario));
+		}
 
-	public Boolean getValidadeEmail() {
-		return validadeEmail;
-	}
-
-	public Boolean getValidadeCpf() {
-		return validadeCpf;
 	}
 
 }

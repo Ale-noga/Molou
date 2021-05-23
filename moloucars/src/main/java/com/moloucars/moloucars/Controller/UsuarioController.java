@@ -28,6 +28,9 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioRepository repository;
+	
+	@Autowired
+	private UsuarioService service;
 
 	@GetMapping
 	public ResponseEntity<List<Usuario>> getAll() {
@@ -40,8 +43,8 @@ public class UsuarioController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Usuario> post(@RequestBody Usuario usuario) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(usuario));
+	public ResponseEntity<?> post(@RequestBody @Valid Usuario usuario) {
+		return service.postUsuario(usuario);
 	}
 
 	@PutMapping

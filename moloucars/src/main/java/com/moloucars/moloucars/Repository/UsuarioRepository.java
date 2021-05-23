@@ -8,8 +8,10 @@ import org.springframework.stereotype.Repository;
 import com.moloucars.moloucars.Model.Usuario;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-	Optional<Usuario> findByCpf (String cpf);
-	
+	Optional<Usuario> findByCpfEquals(String cpf);
+
+	Optional<Usuario> findByEmailEquals(String email);
+
 }
