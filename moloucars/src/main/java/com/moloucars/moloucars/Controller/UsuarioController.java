@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,7 +29,7 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioRepository repository;
-	
+
 	@Autowired
 	private UsuarioService service;
 
@@ -45,6 +46,7 @@ public class UsuarioController {
 	@PostMapping
 	public ResponseEntity<?> post(@RequestBody @Valid Usuario usuario) {
 		return service.postUsuario(usuario);
+
 	}
 
 	@PutMapping

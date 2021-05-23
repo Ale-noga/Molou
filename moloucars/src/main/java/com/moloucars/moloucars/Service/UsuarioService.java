@@ -23,12 +23,12 @@ public class UsuarioService {
 		Optional<Usuario> validaEmail = repository.findByEmailEquals(email);
 
 		if (validaCpf.isPresent()) {
-			String message = "CPF DUPLICADO";
+			String message = "CPF JÁ CADASTRADO NO SISTEMA.";
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
 		}
 
 		else if (validaEmail.isPresent()) {
-			String message = "E-MAIL DUPLICADO";
+			String message = "E-MAIL JÁ CADASTRADO NO SISTEMA.";
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
 		}
 
