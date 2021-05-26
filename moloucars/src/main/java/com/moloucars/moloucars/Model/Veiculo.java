@@ -29,7 +29,9 @@ public class Veiculo {
 
 	@NotNull
 	@Size(min = 4, max = 4)
-	private Long ano;
+	private String ano;
+
+	private String tipoVeiculo;
 
 	private String valor;
 
@@ -61,12 +63,20 @@ public class Veiculo {
 		this.modelo = modelo;
 	}
 
-	public Long getAno() {
+	public String getAno() {
 		return ano;
 	}
 
-	public void setAno(Long ano) {
+	public void setAno(String ano) {
 		this.ano = ano;
+	}
+
+	public String getTipoVeiculo() {
+		return tipoVeiculo;
+	}
+
+	public void setTipoVeiculo(String tipoVeiculo) {
+		this.tipoVeiculo = tipoVeiculo;
 	}
 
 	public String getValor() {

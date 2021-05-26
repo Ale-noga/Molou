@@ -3,24 +3,29 @@ package com.moloucars.moloucars.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.moloucars.moloucars.Model.VeiculoFipe;
-import com.moloucars.moloucars.Service.FipeService;
+import com.moloucars.moloucars.Model.Veiculo;
+import com.moloucars.moloucars.Repository.VeiculoRepository;
+import com.moloucars.moloucars.Service.VeiculoService;
 
 @RestController
+@RequestMapping("/veiculo")
 @CrossOrigin("*")
 public class VeiculoController {
 	
 	@Autowired
-	private FipeService fipesevice;
+	private VeiculoRepository repository;
 	
-	@GetMapping("/{tipoVeiculo}/marcas")
-	public ResponseEntity<VeiculoFipe> getMarcas (@PathVariable String tipoVeiculos){
-		VeiculoFipe veiculo = fipesevice.getAllMarcas(tipoVeiculos);
-		return veiculo != null ? ResponseEntity.ok().body(veiculo) : ResponseEntity.notFound().build();
+	@Autowired
+	private VeiculoService service;
+	
+	@PostMapping
+	public ResponseEntity<?> post(@RequestBody Veiculo veiculo) {
+		return service.postVeiculo(veiculo);
 	}
 
 }
